@@ -40,7 +40,7 @@
                                     <th scope="col">Voltage TN</th>
                                     <th scope="col">Power Factor</th>
                                     <th scope="col">Frequency</th>
-                                    {{--                                <th scope="col">Aksi</th>--}}
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
