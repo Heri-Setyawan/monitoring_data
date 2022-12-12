@@ -23,7 +23,6 @@
         <section class="content card">
             <div class="card-body">
                 <div class="container-fluid">
-                    
                     <div class="row">
                         <div class="col-md">
                             <table id="report" class="table table-hover table-bordered"
