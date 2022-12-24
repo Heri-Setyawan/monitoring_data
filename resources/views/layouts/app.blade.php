@@ -28,9 +28,22 @@
         <!-- Daterange picker -->
         <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-        {{-- <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css"> --}}
-        <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+        <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
         <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap -->
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- overlayScrollbars -->
+        <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+
+        <!-- OPTIONAL SCRIPTS -->
+        <script src="{{ asset('dist/js/demo.js') }}"></script>
+
 
 
     </head>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Monitor;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         //        if(Auth::hasUser())
-        return view('welcome', ['session' => $request->session()->get('key')]);
+        $tools = Tool::all()->count();
+        return view('welcome', ['session' => $request->session()->get('key'), 'tool' => $tools]);
     }
 
     public function realtime()

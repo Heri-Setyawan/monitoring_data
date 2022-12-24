@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Monitor;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,18 +27,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.dashboard');
+
+        $tools = Tool::all()->count();
+        return view('users.dashboard', ['tool' => $tools]);
     }
 
-    public function realtime(){
+    public function realtime()
+    {
         $get = Monitor::latest()->first();
 
         return response()->json($get, 200);
     }
 
+    public function voltageLatest($voltage)
+    {
 
-    public function logout(){
+        $get = Monitor::latest()->limit(5)->get()->toArray();
+        $datas = array_column($get, $voltage);
+
+        return response()->json($datas, 200);
+    }
+
+
+    public function logout()
+    {
         Auth::logout();
-      return redirect('/login');
+        return redirect('/login');
     }
 }

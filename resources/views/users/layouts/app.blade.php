@@ -29,7 +29,16 @@
         <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap -->
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- overlayScrollbars -->
+        <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 
+        <!-- OPTIONAL SCRIPTS -->
+        <script src="{{ asset('dist/js/demo.js') }}"></script>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -40,6 +49,6 @@
     </div>
 
     </body>
-    
-    
+
+
 </html>

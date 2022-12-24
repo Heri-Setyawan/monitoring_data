@@ -36,28 +36,26 @@ class PlaybackController extends Controller
 
     public function barChart(Request $request, $monitor)
     {
-        $monitor_type = $request->input('component');
-        $hours = [];
-        $count = [];
-        for ($i = 1; $i < 25; $i++) {
-            $hours[$i] = [$i, $i . '.00'];
-            $get = Monitor::whereDate('created_at', $monitor)->whereNotNull($monitor_type)->get();
-            $group = $get->groupBy(function ($gets) {
-                return date('H', strtotime($gets->created_at));
-            })->toArray();
-            if (strlen((string)$i) == 1) {
-                $h = '0' . $i;
-            } else {
-                $h = $i;
-            }
 
-            if (isset($group[$h])) {
-                $count[$i] = [$i, count($group[$h])];
+        $monitor_type = $request->input('component');
+        $hour = $request->input('hour');
+        $nextHour = $hour + 1;
+        $value = [];
+        $count = [];
+        $get = Monitor::whereDate('created_at', $monitor)->whereNotNull($monitor_type)
+            ->whereTime('created_at', '>=', "$hour:00:00")->whereTime('created_at', '<', "$nextHour:00:00")->get();
+
+        for ($i = 0; $i < count($get); $i++) {
+
+            if (isset($get)) {
+                $count[$i] = [$i, date('H:i:s', strtotime($get[$i]->created_at))];
+                $value[$i] = [$i, $get[$i]->$monitor_type];
             } else {
                 $count[$i] = [$i, 0];
             }
         }
 
-        return response()->json(['column' => $count, 'hours' => $hours], 200);
+
+        return response()->json(['column' => $value, 'hours' => $count], 200);
     }
 }

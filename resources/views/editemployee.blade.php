@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            
+
                             <form action="/updateemployee/{{ $employee->id }}" method="post" enctype="multipart/form_data" class="was-validated">
                                 @csrf
                                 <div class="form-row">
@@ -40,8 +40,16 @@
                                     </div>
 
                                     <div class=" col-md-3 mb-3">
+                                        <label for="validationRole">Role</label>
+                                        <select class="form-control is-invalid" name="role" id="" required>
+                                            <option value="user">User</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
+
+                                    <div class=" col-md-3 mb-3">
                                         <label for="validationPassword">Password</label>
-                                        <input type="password" class="form-control is-invalid" name="password" id="validationPassword" placeholder="Password" value="{{ bcrypt($employee->password) }}"required>
+                                        <input type="password" class="form-control is-invalid" name="password" id="validationPassword" placeholder="Password" value="{{ $employee->password }}"required>
                                     </div>
                                 </div>
 
@@ -50,7 +58,7 @@
                                         <label for="validationAlamat">Alamat</label>
                                         <textarea class="form-control is-invalid" name="address" id="validationAlamat" placeholder="address" rows="3" required>{{ $employee->address }}</textarea>
                                     </div>
-                                
+
                                     <div class="col-md-4 mb-3">
                                         <label for="validationPosition">Jabatan</label>
                                             <select class="custom-select" name="position" id="validationPosition" required>
@@ -68,14 +76,14 @@
                                         <input class="form-control is-invalid" name="age" id="validationAge" placeholder="age" value="{{ $employee->age }}"required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>    
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
 
                         </div>
                     </div>
                 </div>
             </div>
-        </div>          
+        </div>
         <!-- /.content -->
     </div>
 @endsection

@@ -14,8 +14,15 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $datas = Monitor::with('tool')->latest()->paginate();
-        return view('report.index', compact('datas'))->with('i', (request()->input('page', 1) -1) * 15);
+        $datas = Monitor::with('tool')->latest()->get();
+        return view('report.index', ['angkatan'=>$datas]);
+    }
+
+    public function filter(Request $request)
+    {
+        $date = $request->input('date');
+        $datas = Monitor::with('tool')->latest()->whereDate('created_at', $date)->get();
+        return view('report.index', ['angkatan'=>$datas]);
     }
 
     /**

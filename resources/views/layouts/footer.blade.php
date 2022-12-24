@@ -6,16 +6,6 @@
     </div>
 </footer>
 
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- overlayScrollbars -->
-<script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.js') }}"></script>
-
-<!-- OPTIONAL SCRIPTS -->
-<script src="{{ asset('dist/js/demo.js') }}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -28,10 +18,12 @@
 <script src="{{ asset('plugins/flot/jquery.flot.js') }}"></script>
 <script src="{{ asset('plugins/flot/plugins/jquery.flot.resize.js') }}"></script>
 <!-- PAGE SCRIPTS -->
-<script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -41,14 +33,15 @@
 
 <script>
     $(document).ready(function() {
-        setInterval(function () {
-            getMonitor()
-        }, 5000)
+        getMonitor()
+
 
         $('#report').DataTable({
+            searching: false,
+            // pageLength: 25,
             dom: 'Bfrtip',
             buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'pdf', 'print'
         ]
         });
     })
@@ -99,3 +92,95 @@
 
 
 </script>
+
+<script src="">
+    //-------------
+    //- LINE CHART -
+    //--------------
+    new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+            labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+            datasets: [{
+                data: [86,114,106,106,107,111,133,221,783,2478],
+                label: "Africa",
+                borderColor: "#3e95cd",
+                fill: false
+            }, {
+                data: [282,350,411,502,635,809,947,1402,3700,5267],
+                label: "Asia",
+                borderColor: "#8e5ea2",
+                fill: false
+            }, {
+                data: [168,170,178,190,203,276,408,547,675,734],
+                label: "Europe",
+                borderColor: "#3cba9f",
+                fill: false
+            }, {
+                data: [40,20,10,16,24,38,74,167,508,784],
+                label: "Latin America",
+                borderColor: "#e8c3b9",
+                fill: false
+            }, {
+                data: [6,3,2,2,7,26,82,172,312,433],
+                label: "North America",
+                borderColor: "#c45850",
+                fill: false
+            }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'World population per region (in millions)'
+            }
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    function showTime() {
+        var a_p = "";
+        var today = new Date();
+        var curr_hour = today.getHours();
+        var curr_minute = today.getMinutes();
+        var curr_second = today.getSeconds();
+        if (curr_hour < 12) {
+            a_p = "AM";
+        } else {
+            a_p = "PM";
+        }
+        if (curr_hour == 0) {
+            curr_hour = 12;
+        }
+            if (curr_hour > 12) {
+            curr_hour = curr_hour - 12;
+        }
+        curr_hour = checkTime(curr_hour);
+        curr_minute = checkTime(curr_minute);
+        curr_second = checkTime(curr_second);
+        document.getElementById('clock').innerHTML=curr_hour + ":" + curr_minute + ":" + curr_second + " " + a_p;
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+    setInterval(showTime, 500);
+</script>
+
+<script type='text/javascript'>
+	var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+	var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
+	var date = new Date();
+	var day = date.getDate();
+	var month = date.getMonth();
+	var thisDay = date.getDay(),
+	thisDay = myDays[thisDay];
+	var yy = date.getYear();
+	var year = (yy < 1000) ? yy + 1900 : yy;
+	document.getElementById('calender').innerHTML=thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
+</script>
+

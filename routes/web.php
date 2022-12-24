@@ -17,6 +17,7 @@ Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 
 
 Route::get('/realtime', [App\Http\Controllers\HomeController::class, 'realtime']);
+Route::get('/voltage-latest/{voltage}', [App\Http\Controllers\Users\HomeController::class, 'voltageLatest']);
 Route::get('/barchart/{ranges}', [App\Http\Controllers\Users\PlaybackController::class, 'barChart']);
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->middleware('role:admin')->name('home');
@@ -38,4 +39,5 @@ Route::get('/deleteemployee/{id}', [App\Http\Controllers\EmployeeController::cla
 
 
 Route::resource('/report', \App\Http\Controllers\ReportController::class);
+Route::get('/filter-report', [\App\Http\Controllers\ReportController::class, 'filter']);
 Route::get('/playback', [\App\Http\Controllers\Users\PlaybackController::class, 'index'])->middleware('role:user')->name('playback');

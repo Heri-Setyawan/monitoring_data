@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class EmployeeController extends Controller
 {
@@ -21,9 +23,14 @@ class EmployeeController extends Controller
     }
 
     public function insertemployee(Request $request) {
-        //dd($request->all());
-        //User::create($request->all());
-        User::create([
+        $validated = Validator::make($request->all(),[
+           'email' => 'required|unique:users',
+       ]);
+        if($validated->fails()){
+            return redirect()->route('employee')->with('failed',$validated->errors());
+        }
+
+       $user = User::create([
             'name' => $request->name,
             'position' => $request->position,
             'age' => $request->age,
@@ -31,6 +38,12 @@ class EmployeeController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+
+        if($request->input('role') == 'user'){
+            $user->assignRole('user');
+        }else{
+            $user->assignRole('admin');
+        }
 
         return redirect()->route('employee')->with('success','Data Berhasil di Input');
     }
@@ -51,13 +64,21 @@ class EmployeeController extends Controller
 
     public function updateemployee(Request $request, $id){
         $employee = User::find($id);
+        $pass = ($request->password == $employee->password) ? $request->password : bcrypt($request->password);
         $employee->update([
             'name' => $request->name,
             'position' => $request->position,
             'age' => $request->age,
             'address' => $request->address,
             'email' => $request->email,
-            'password' => bcrypt($request->password),]);
+            'password' => $pass,
+            ]);
+
+        if($request->input('role') == 'user'){
+            $employee->syncRoles('user');
+        }else{
+            $employee->syncRoles('admin');
+        }
 
         return redirect()->route('employee')->with('success','Data Berhasil di Update');
     }

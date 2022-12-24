@@ -38,10 +38,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $No = 1;
-                            @endphp
-                            @foreach ($employee as $e )
+                                @php
+                                    $No = 1;
+                                @endphp
+                                @foreach ($employee as $e )
                                 
                                 <tr>
                                     <th scope="row">{{ $No++ }}</th>
@@ -55,9 +55,11 @@
                                         <a href="/deleteemployee/{{ $e->id }}"  class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
+
                             </tbody>
                         </table>
+                       
                     </div>
                 </div>
         </section>

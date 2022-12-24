@@ -23,8 +23,19 @@
         <section class="content card">
             <div class="card-body">
                 <div class="container-fluid">
+
                     <div class="row">
                         <div class="col-md">
+                            <div class="row">
+                                <div class="col-10"></div>
+                                <div class="col-2">
+                                    <form action="/filter-report" method="get">
+                                        @csrf
+                                        <input type="date" name="date" id="date">
+                                        <button type="submit">Tampilkan</button>
+                                    </form>
+                                </div>
+                            </div>
                             <table id="report" class="table table-hover table-bordered"
                                    style="width:100%">
                                 <thead>
@@ -39,13 +50,13 @@
                                     <th scope="col">Voltage TN</th>
                                     <th scope="col">Power Factor</th>
                                     <th scope="col">Frequency</th>
-                                    
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($datas as $report )
+                                @foreach ($angkatan as $i => $report )
+
                                     <tr>
-                                        <th scope="row">{{++$i}}</th>
+                                        <th scope="row">{{$loop->iteration}}</th>
                                         <td>{{ $report->tool->name }}</td>
                                         <td>{{ $report->voltage_rs }}</td>
                                         <td>{{ $report->voltage_st }}</td>
@@ -60,6 +71,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+{{--                            {{ $angkatan->links() }}--}}
                         </div>
 
                     </div>
