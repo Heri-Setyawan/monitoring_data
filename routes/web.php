@@ -37,6 +37,7 @@ Route::post('/updateemployee/{id}', [App\Http\Controllers\EmployeeController::cl
 
 Route::get('/deleteemployee/{id}', [App\Http\Controllers\EmployeeController::class, 'deleteemployee'])->name('deleteemployee');
 
+Route::get('/playback-admin', [\App\Http\Controllers\PlaybackAdminController::class, 'index'])->middleware('role:admin')->name('playback-admin');
 
 Route::resource('/report', \App\Http\Controllers\ReportController::class);
 Route::get('/filter-report', [\App\Http\Controllers\ReportController::class, 'filter']);
